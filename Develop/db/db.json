@@ -1,8 +1,23 @@
 {
-    "notes":[
-        {
-            "title":"Hello",
-            "text":"holaaaaaaa"
-        }
-]
+  "notes": [
+    {
+      "title": "Hello",
+      "text": "holaaaaaaa"
+    },
+    {
+      "title": "Things to do today",
+      "text": "finish the project",
+      "id": "1"
+    },
+    {
+      "title": "Things to do today",
+      "text": "finish the project",
+      "id": "2"
+    },
+    {
+      "title": "Things to do tomorrow",
+      "text": "take the trash",
+      "id": "3"
+    }
+  ]
 }
