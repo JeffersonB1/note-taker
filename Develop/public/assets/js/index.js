@@ -32,7 +32,8 @@ const getNotes = () =>
       'Content-Type': 'application/json',
     },
   });
-
+  
+// save a note to the db
 const saveNote = (note) =>
   fetch('/api/notes', {
     method: 'POST',
@@ -42,6 +43,7 @@ const saveNote = (note) =>
     body: JSON.stringify(note),
   });
 
+// delete a note from the db
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
     method: 'DELETE',
@@ -50,6 +52,8 @@ const deleteNote = (id) =>
     },
   });
 
+
+// if there is an activeNote, display it, otherwise render empty inputs
 const renderActiveNote = () => {
   hide(saveNoteBtn);
 
@@ -66,6 +70,8 @@ const renderActiveNote = () => {
   }
 };
 
+
+// Get the note data from the inputs, save it to the db and update the view
 const handleNoteSave = () => {
   const newNote = {
     title: noteTitle.value,
@@ -180,4 +186,5 @@ if (window.location.pathname === '/notes') {
   noteText.addEventListener('keyup', handleRenderSaveBtn);
 }
 
+// Gets and renders the initial list of notes
 getAndRenderNotes();
