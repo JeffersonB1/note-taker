@@ -2,7 +2,7 @@ const router = require('express').Router();
 const express = require('express')
 const path = require('path');
 const fs = require('fs');
-const note = require('../db/db.json');
+const notes = require('../db/db.json');
 const{v4:uuid}= require('uuid');
 
 
@@ -26,10 +26,10 @@ router.post('/api/notes', (req, res) => {
         "text": req.body.text,
         "id": uuid()
     }
-    note.push(createNewNote)
+    notes.push(createNewNote)
     fs.writeFileSync(path.join(__dirname, '../db/db.json'),
-    JSON.stringify(note, null, 2))
-    res.json(note);
+    JSON.stringify(notes, null, 2))
+    res.json(notes);
 });
 
 
@@ -37,18 +37,21 @@ router.get('/api/notes', (req, res) => {
     res.json(notes);
 });
 
-router.delete('/notes/:id', (req, res) => {
-    for (let i = 0; i < note.length; i++) {
-        if (note[i].id === req.params.id) {
-            note.splice(i, 1);
+router.delete('/api/notes/:id', (req, res) => {
+    for (let i = 0; i < notes.length; i++) {
+        if (notes[i].id === req.params.id) {
+            notes.splice(i, 1);
         }
     }
+    fs.writeFileSync(path.join(__dirname, '../db/db.json'),
+    JSON.stringify(notes, null, 2))
+    res.json(notes);
 })
 
-router.get('/api/notes:id', (req, res) => {
-    for (let i = 0; i < note.length; i++) {
-        if (note[i].id === req.params.id) {
-            req.json(note[i]);
+router.get('/api/notes/:id', (req, res) => {
+    for (let i = 0; i < notes.length; i++) {
+        if (notes[i].id === req.params.id) {
+            res.json(notes[i]);
         }
     }
 });

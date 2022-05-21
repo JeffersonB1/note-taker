@@ -1,23 +1,18 @@
 // dependencies
-const fs = require('fs');
-const path = require('path');
 const express = require ('express');
+const app = express(); // Express App set up
+const routes = require('./routes/routes');
+const PORT = process.env.PORT || 3001; // sets port to listen and let heroku
+                                        // decide on port, otherwhise, use port
+                                        // 3001
 
-// Express App set up
-const app = express();
-
-// sets port to listen and let heroku decide on port, otherwhise, use port 3001
-const PORT = process.env.PORT || 3001;
 
 
-// parse incoming string or array data
-app.use(express.static('public'));
+app.use(express.static('public')); // parse incoming string or array data
 app.use(express.urlencoded({ extended: true }));
-// parse incoming json data
-app.use(express.json());
-const {notes} = require('./Develop/db/db.json');
-const res = require('express/lib/response');
-
+app.use(express.json()); // parse incoming json data
+app.use('/', routes);
+// app.use('/api', routes);
 
 
 
